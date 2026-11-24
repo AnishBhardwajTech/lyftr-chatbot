@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from dataclasses import dataclass
 from typing import Any, Optional
 
@@ -91,12 +92,17 @@ def simulated_error(status: int, entry: KeyEntry) -> Exception:
 
 
 def describe_error(exc: Exception) -> str:
+    """Short, log-safe description: exception type, HTTP status and a trimmed message."""
     status = getattr(exc, "status_code", None)
     kind = type(exc).__name__
-    text = str(exc).lower()
-    if "quota" in text or "resource_exhausted" in text:
+    raw = " ".join(str(exc).split())
+    # Never let an API key reach the logs (Gemini URLs carry ?key=...).
+    raw = re.sub(r"(key=)[^&\s\"']+", r"\1***", raw)
+    raw = re.sub(r"\b(AIza[0-9A-Za-z_\-]{10,}|AQ\.[0-9A-Za-z_\-.]{10,}|sk-[0-9A-Za-z_\-]{10,})", "***", raw)
+    if "quota" in raw.lower() or "resource_exhausted" in raw.lower():
         kind += "/quota"
-    return f"{kind}({status})" if status else kind
+    label = f"{kind}({status})" if status else kind
+    return f"{label}: {raw[:300]}" if raw else label
 
 
 # ---------------------------------------------------------------------------------------
