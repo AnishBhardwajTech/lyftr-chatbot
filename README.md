@@ -16,11 +16,14 @@ Makefile             make up / make down / make test
 
 | Tier | URL |
 |------|-----|
-| Frontend | `https://<your-frontend>.vercel.app` |
-| Backend  | `https://<your-backend>.onrender.com` |
-| Health   | `https://<your-backend>.onrender.com/health` |
-| Repository | `https://github.com/<you>/lyftr-chatbot` |
-| Demo video | `<link>` |
+| Frontend | https://lyftr-chatbot-chi.vercel.app |
+| Backend  | https://lyftr-chatbot-8sad.onrender.com |
+| Health   | https://lyftr-chatbot-8sad.onrender.com/health |
+| API docs (Swagger) | https://lyftr-chatbot-8sad.onrender.com/docs |
+| Repository | https://github.com/AnishBhardwajTech/lyftr-chatbot |
+| Demo video | `<add link>` |
+
+> The backend runs on Render's free tier, which sleeps after ~15 minutes of inactivity. The first request after a pause can take ~50 seconds while it wakes up; later requests are fast.
 
 ---
 
