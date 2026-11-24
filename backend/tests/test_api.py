@@ -29,7 +29,7 @@ def _msg(text: str = "hello") -> str:
 def client(tmp_path):
     settings = Settings(
         api_keys=["fake-key-a", "fake-key-b"],
-        models=["gemini/gemini-3.8-flash"],
+        models=["gemini/gemini-3.5-flash-lite"],
         database_url=f"sqlite:///{tmp_path}/app.db",
         allowed_origins=["http://localhost:3000"],
         enable_failure_simulation=True,
@@ -66,7 +66,7 @@ def test_chat_response_contract(client):
     assert body["reply"]
     meta = body["metadata"]
     assert meta["resolution_source"] == "LIVE_INFERENCE"
-    assert meta["model"] == "gemini/gemini-3.8-flash"
+    assert meta["model"] == "gemini/gemini-3.5-flash-lite"
     assert isinstance(meta["latency_ms"], int)
     assert isinstance(meta["input_tokens"], int) and meta["input_tokens"] > 0
     assert isinstance(meta["output_tokens"], int) and meta["output_tokens"] > 0

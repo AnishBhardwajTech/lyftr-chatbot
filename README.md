@@ -68,7 +68,7 @@ npm run dev                                           # http://localhost:3000
 | Variable | Default | Meaning |
 |---|---|---|
 | `LLM_API_KEYS` | — | Comma-separated key pool (≥ 2). Ids are `key_1`, `key_2`, … in this order. |
-| `LLM_MODEL` | `gemini/gemini-3.8-flash` | LiteLLM model used by every key |
+| `LLM_MODEL` | `gemini/gemini-3.5-flash-lite` | LiteLLM model used by every key |
 | `LLM_MODELS` | — | Optional: one model per key, aligned with `LLM_API_KEYS` (multi-model pool) |
 | `DATABASE_URL` | `sqlite:///./data/app.db` (Docker: `sqlite:////data/app.db`) | SQLite location |
 | `ALLOWED_ORIGINS` | `http://localhost:3000,http://localhost:5173` | CORS origins |
@@ -212,7 +212,7 @@ curl -s -X POST $API/chat -H 'Content-Type: application/json' -d '{"session_id":
 
 * **Failure simulator in the UI.** A dropdown sends `X-Simulate-Failure`, so failover can be shown live from the browser, not only with curl.
 * **Persistent disk cache.** The LiteLLM cache lives in the same Docker volume as the database, so cache hits survive restarts and redeploys on hosts with a volume.
-* **Multi-model pool.** `LLM_MODELS` lets each key use a different model or provider (for example a Gemini key plus a Groq key), and failover works across providers because LiteLLM normalises their errors.
+* **Multi-model pool (used in the live deployment).** key_1 runs `gemini-3.5-flash-lite` and key_2 runs `gemini-3.1-flash-lite`. During deployment a single model returned 503 "high demand" on both keys, so the pool was spread across two models to give failover a genuinely independent path. `LLM_MODELS` lets each key use a different model or provider (for example a Gemini key plus a Groq key), and failover works across providers because LiteLLM normalises their errors.
 * **Per-session system prompt** (`system-prompt-input`), stored in SQLite and reused for the rest of the session.
 * **Offline mock mode** (`MOCK_LLM=true`). The whole stack and the test suite run with no keys or network.
 * **Extra metadata in the UI:** answering `key_id`, a failover badge, and backend health in the header (key count and cache status).

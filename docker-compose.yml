@@ -5,8 +5,8 @@ services:
     container_name: lyftr-backend
     environment:
       LLM_API_KEYS: ${LLM_API_KEYS:-}
-      LLM_MODEL: ${LLM_MODEL:-gemini/gemini-3.8-flash}
-      LLM_MODELS: ${LLM_MODELS:-}
+      LLM_MODEL: ${LLM_MODEL:-gemini/gemini-3.5-flash-lite}
+      LLM_MODELS: ${LLM_MODELS:-gemini/gemini-3.5-flash-lite,gemini/gemini-3.1-flash-lite}
       DATABASE_URL: ${DATABASE_URL:-sqlite:////data/app.db}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}
       ENABLE_FAILURE_SIMULATION: ${ENABLE_FAILURE_SIMULATION:-true}

@@ -35,7 +35,7 @@ class Settings:
     api_keys: list[str] = field(default_factory=lambda: _csv("LLM_API_KEYS"))
     # One model for every key, or a comma-separated list aligned with LLM_API_KEYS.
     models: list[str] = field(
-        default_factory=lambda: _csv("LLM_MODELS") or _csv("LLM_MODEL", "gemini/gemini-3.8-flash")
+        default_factory=lambda: _csv("LLM_MODELS") or _csv("LLM_MODEL", "gemini/gemini-3.5-flash-lite")
     )
     database_url: str = field(default_factory=lambda: os.getenv("DATABASE_URL", "sqlite:///./data/app.db"))
     allowed_origins: list[str] = field(
@@ -63,7 +63,7 @@ class Settings:
 
     def model_for(self, index: int) -> str:
         if not self.models:
-            return "gemini/gemini-3.8-flash"
+            return "gemini/gemini-3.5-flash-lite"
         return self.models[index] if index < len(self.models) else self.models[0]
 
     @property
