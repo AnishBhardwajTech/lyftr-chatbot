@@ -68,7 +68,7 @@ npm run dev                                           # http://localhost:3000
 | Variable | Default | Meaning |
 |---|---|---|
 | `LLM_API_KEYS` | — | Comma-separated key pool (≥ 2). Ids are `key_1`, `key_2`, … in this order. |
-| `LLM_MODEL` | `gemini/gemini-2.5-flash` | LiteLLM model used by every key |
+| `LLM_MODEL` | `gemini/gemini-3.8-flash` | LiteLLM model used by every key |
 | `LLM_MODELS` | — | Optional: one model per key, aligned with `LLM_API_KEYS` (multi-model pool) |
 | `DATABASE_URL` | `sqlite:///./data/app.db` (Docker: `sqlite:////data/app.db`) | SQLite location |
 | `ALLOWED_ORIGINS` | `http://localhost:3000,http://localhost:5173` | CORS origins |
@@ -203,7 +203,7 @@ curl -s -X POST $API/chat -H 'Content-Type: application/json' -d '{"session_id":
 * **Editor:** VS Code
 * **AI tools:** Claude (Anthropic), used for scaffolding, code review and the test suite
 * **Stack:** Python 3.12, FastAPI, LiteLLM 1.77, SQLite, React 18 + Vite, Docker Compose
-* **LLM provider:** Google Gemini (free-tier API keys from two Google AI Studio projects)
+* **LLM provider:** Google Gemini (two free-tier Google AI Studio API keys)
 * **Hosting:** Render (backend, Docker) and Vercel (frontend)
 
 ---

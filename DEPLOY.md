@@ -5,9 +5,9 @@
 2. Click **Create API key** and choose **Create in new project**. Copy it.
 3. Click **Create API key** again, choose **another new project**, and copy that one too.
    (Gemini free-tier quotas are per project, so these are two independent keys.)
-4. Check the model name works for you (e.g. `gemini/gemini-2.5-flash`, or `gemini/gemini-2.5-flash-lite`).
+4. Check the model name works for you (e.g. `gemini/gemini-3.8-flash`, or `gemini/gemini-3.8-flash-lite`).
    Alternative: one Gemini key + one Groq key (console.groq.com), with
-   `LLM_MODELS=gemini/gemini-2.5-flash,groq/llama-3.1-8b-instant`.
+   `LLM_MODELS=gemini/gemini-3.8-flash,groq/llama-3.1-8b-instant`.
 
 ## 1. Test locally (5 min)
 ```
@@ -33,7 +33,7 @@ Make the repo **public**. `.env` is git-ignored, so never commit real keys.
 2. Root Directory: `backend`. Runtime: **Docker**. Instance type: **Free**.
 3. Environment variables:
    - `LLM_API_KEYS` = `key1,key2`
-   - `LLM_MODEL` = `gemini/gemini-2.5-flash`
+   - `LLM_MODEL` = `gemini/gemini-3.8-flash`
    - `DATABASE_URL` = `sqlite:////data/app.db`
    - `ENABLE_FAILURE_SIMULATION` = `true`
    - `ALLOWED_ORIGINS` = `http://localhost:3000` (update in step 5)
